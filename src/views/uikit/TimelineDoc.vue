@@ -3,11 +3,10 @@ import { ref } from 'vue';
 
 const events = ref([
     {
-        status: 'Ordered',
+        status: 'Requested',
         date: '15/10/2020 10:30',
         icon: 'pi pi-shopping-cart',
-        color: '#9C27B0',
-        image: 'game-controller.jpg'
+        color: '#9C27B0'
     },
     {
         status: 'Processing',
@@ -18,68 +17,23 @@ const events = ref([
     {
         status: 'Shipped',
         date: '15/10/2020 16:15',
-        icon: 'pi pi-envelope',
+        icon: 'pi pi-truck',
         color: '#FF9800'
     },
     {
         status: 'Delivered',
         date: '16/10/2020 10:00',
         icon: 'pi pi-check',
-        color: '#607D8B'
+        color: 'green'
     }
 ]);
-
-const horizontalEvents = ref(['2020', '2021', '2022', '2023']);
 </script>
 
 <template>
     <div class="grid grid-cols-12 gap-8">
-        <div class="col-span-6">
-            <div class="card">
-                <div class="font-semibold text-xl mb-4">Left Align</div>
-                <Timeline :value="events">
-                    <template #content="slotProps">
-                        {{ slotProps.item.status }}
-                    </template>
-                </Timeline>
-            </div>
-        </div>
-        <div class="col-span-6">
-            <div class="card">
-                <div class="font-semibold text-xl mb-4">Right Align</div>
-                <Timeline :value="events" align="right">
-                    <template #content="slotProps">
-                        {{ slotProps.item.status }}
-                    </template>
-                </Timeline>
-            </div>
-        </div>
-        <div class="col-span-6">
-            <div class="card">
-                <div class="font-semibold text-xl mb-4">Alternate Align</div>
-                <Timeline :value="events" align="alternate">
-                    <template #content="slotProps">
-                        {{ slotProps.item.status }}
-                    </template>
-                </Timeline>
-            </div>
-        </div>
-        <div class="col-span-6">
-            <div class="card">
-                <div class="font-semibold text-xl mb-4">Opposite Content</div>
-                <Timeline :value="events">
-                    <template #opposite="slotProps">
-                        <small class="text-muted-color">{{ slotProps.item.date }}</small>
-                    </template>
-                    <template #content="slotProps">
-                        {{ slotProps.item.status }}
-                    </template>
-                </Timeline>
-            </div>
-        </div>
         <div class="col-span-full">
             <div class="card">
-                <div class="font-semibold text-xl mb-4">Templating</div>
+                <div class="font-semibold text-xl mb-4">Blood Request Status</div>
                 <Timeline :value="events" align="alternate" class="customized-timeline">
                     <template #marker="slotProps">
                         <span class="flex w-8 h-8 items-center justify-center text-white rounded-full z-10 shadow-sm" :style="{ backgroundColor: slotProps.item.color }">
@@ -100,35 +54,9 @@ const horizontalEvents = ref(['2020', '2021', '2022', '2023']);
                                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse,
                                     cupiditate neque quas!
                                 </p>
-                                <Button label="Read more" text></Button>
+                                <Button label="View Blood Request" text></Button>
                             </template>
                         </Card>
-                    </template>
-                </Timeline>
-            </div>
-        </div>
-        <div class="col-span-full">
-            <div class="card">
-                <div class="font-semibold text-xl mb-4">Horizontal</div>
-                <div class="font-semibold mb-2">Top Align</div>
-                <Timeline :value="horizontalEvents" layout="horizontal" align="top">
-                    <template #content="slotProps">
-                        {{ slotProps.item }}
-                    </template>
-                </Timeline>
-
-                <div class="font-semibold mt-4 mb-2">Bottom Align</div>
-                <Timeline :value="horizontalEvents" layout="horizontal" align="bottom">
-                    <template #content="slotProps">
-                        {{ slotProps.item }}
-                    </template>
-                </Timeline>
-
-                <div class="font-semibold mt-4 mb-2">Alternate Align</div>
-                <Timeline :value="horizontalEvents" layout="horizontal" align="alternate">
-                    <template #opposite> &nbsp; </template>
-                    <template #content="slotProps">
-                        {{ slotProps.item }}
                     </template>
                 </Timeline>
             </div>

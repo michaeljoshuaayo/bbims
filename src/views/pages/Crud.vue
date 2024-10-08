@@ -20,16 +20,6 @@ const filters = ref({
     global: { value: null, matchMode: FilterMatchMode.CONTAINS }
 });
 const submitted = ref(false);
-const statuses = ref([
-    { label: 'INSTOCK', value: 'instock' },
-    { label: 'LOWSTOCK', value: 'lowstock' },
-    { label: 'OUTOFSTOCK', value: 'outofstock' }
-]);
-
-function formatCurrency(value) {
-    if (value) return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
-    return;
-}
 
 function openNew() {
     product.value = {};
@@ -116,22 +106,6 @@ function deleteSelectedProducts() {
     selectedProducts.value = null;
     toast.add({ severity: 'success', summary: 'Successful', detail: 'Products Deleted', life: 3000 });
 }
-
-function getStatusLabel(status) {
-    switch (status) {
-        case 'INSTOCK':
-            return 'success';
-
-        case 'LOWSTOCK':
-            return 'warn';
-
-        case 'OUTOFSTOCK':
-            return 'danger';
-
-        default:
-            return null;
-    }
-}
 </script>
 
 <template>
@@ -144,7 +118,7 @@ function getStatusLabel(status) {
                 </template>
 
                 <template #end>
-                    <Button label="Export" icon="pi pi-upload" severity="secondary" @click="exportCSV($event)" />
+                    <Button label="Export to CSV file" icon="pi pi-upload" severity="secondary" @click="exportCSV($event)" />
                 </template>
             </Toolbar>
 
@@ -162,40 +136,21 @@ function getStatusLabel(status) {
             >
                 <template #header>
                     <div class="flex flex-wrap gap-2 items-center justify-between">
-                        <h4 class="m-0">Manage Products</h4>
+                        <h4 class="m-0">Manage Blood Products</h4>
                         <IconField>
                             <InputIcon>
                                 <i class="pi pi-search" />
                             </InputIcon>
-                            <InputText v-model="filters['global'].value" placeholder="Search..." />
+                            <InputText v-model="filters['global'].value" placeholder="Search Blood..." />
                         </IconField>
                     </div>
                 </template>
 
                 <Column selectionMode="multiple" style="width: 3rem" :exportable="false"></Column>
-                <Column field="code" header="Code" sortable style="min-width: 12rem"></Column>
-                <Column field="name" header="Name" sortable style="min-width: 16rem"></Column>
-                <Column header="Image">
-                    <template #body="slotProps">
-                        <img :src="`https://primefaces.org/cdn/primevue/images/product/${slotProps.data.image}`" :alt="slotProps.data.image" class="rounded" style="width: 64px" />
-                    </template>
-                </Column>
-                <Column field="price" header="Price" sortable style="min-width: 8rem">
-                    <template #body="slotProps">
-                        {{ formatCurrency(slotProps.data.price) }}
-                    </template>
-                </Column>
-                <Column field="category" header="Category" sortable style="min-width: 10rem"></Column>
-                <Column field="rating" header="Reviews" sortable style="min-width: 12rem">
-                    <template #body="slotProps">
-                        <Rating :modelValue="slotProps.data.rating" :readonly="true" />
-                    </template>
-                </Column>
-                <Column field="inventoryStatus" header="Status" sortable style="min-width: 12rem">
-                    <template #body="slotProps">
-                        <Tag :value="slotProps.data.inventoryStatus" :severity="getStatusLabel(slotProps.data.inventoryStatus)" />
-                    </template>
-                </Column>
+                <Column field="bloodSerialNumber" header="Blood Serial Number" sortable style="min-width: 12rem"></Column>
+                <Column field="bloodType" header="Blood Type" sortable style="min-width: 10rem"></Column>
+                <Column field="bloodComponent" header="Blood Component" sortable style="min-width: 10rem"></Column>
+                <Column field="expiryDate" header="Expiration Date" sortable style="min-width: 10rem"></Column>
                 <Column :exportable="false" style="min-width: 12rem">
                     <template #body="slotProps">
                         <Button icon="pi pi-pencil" outlined rounded class="mr-2" @click="editProduct(slotProps.data)" />
@@ -205,54 +160,25 @@ function getStatusLabel(status) {
             </DataTable>
         </div>
 
-        <Dialog v-model:visible="productDialog" :style="{ width: '450px' }" header="Product Details" :modal="true">
+        <Dialog v-model:visible="productDialog" :style="{ width: '450px' }" header="Blood Product Details" :modal="true">
             <div class="flex flex-col gap-6">
                 <img v-if="product.image" :src="`https://primefaces.org/cdn/primevue/images/product/${product.image}`" :alt="product.image" class="block m-auto pb-4" />
                 <div>
-                    <label for="name" class="block font-bold mb-3">Name</label>
+                    <label for="name" class="block font-bold mb-3">Blood Serial Number</label>
                     <InputText id="name" v-model.trim="product.name" required="true" autofocus :invalid="submitted && !product.name" fluid />
-                    <small v-if="submitted && !product.name" class="text-red-500">Name is required.</small>
+                    <small v-if="submitted && !product.name" class="text-red-500">Blood Serial Number is required.</small>
                 </div>
                 <div>
-                    <label for="description" class="block font-bold mb-3">Description</label>
-                    <Textarea id="description" v-model="product.description" required="true" rows="3" cols="20" fluid />
+                    <label for="description" class="block font-bold mb-3">Blood Type</label>
+                    <InputText id="description" v-model="product.description" required="true" rows="3" cols="20" fluid />
                 </div>
                 <div>
-                    <label for="inventoryStatus" class="block font-bold mb-3">Inventory Status</label>
-                    <Select id="inventoryStatus" v-model="product.inventoryStatus" :options="statuses" optionLabel="label" placeholder="Select a Status" fluid></Select>
+                    <label for="description" class="block font-bold mb-3">Blood Component</label>
+                    <InputText id="description" v-model="product.description" required="true" rows="3" cols="20" fluid />
                 </div>
-
                 <div>
-                    <span class="block font-bold mb-4">Category</span>
-                    <div class="grid grid-cols-12 gap-4">
-                        <div class="flex items-center gap-2 col-span-6">
-                            <RadioButton id="category1" v-model="product.category" name="category" value="Accessories" />
-                            <label for="category1">Accessories</label>
-                        </div>
-                        <div class="flex items-center gap-2 col-span-6">
-                            <RadioButton id="category2" v-model="product.category" name="category" value="Clothing" />
-                            <label for="category2">Clothing</label>
-                        </div>
-                        <div class="flex items-center gap-2 col-span-6">
-                            <RadioButton id="category3" v-model="product.category" name="category" value="Electronics" />
-                            <label for="category3">Electronics</label>
-                        </div>
-                        <div class="flex items-center gap-2 col-span-6">
-                            <RadioButton id="category4" v-model="product.category" name="category" value="Fitness" />
-                            <label for="category4">Fitness</label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-12 gap-4">
-                    <div class="col-span-6">
-                        <label for="price" class="block font-bold mb-3">Price</label>
-                        <InputNumber id="price" v-model="product.price" mode="currency" currency="USD" locale="en-US" fluid />
-                    </div>
-                    <div class="col-span-6">
-                        <label for="quantity" class="block font-bold mb-3">Quantity</label>
-                        <InputNumber id="quantity" v-model="product.quantity" integeronly fluid />
-                    </div>
+                    <label for="inventoryStatus" class="block font-bold mb-3">Expiry Date</label>
+                    <DatePicker id="inventoryStatus" v-model="product.inventoryStatus" showIcon="true" optionLabel="label" placeholder="Select Date" fluid></DatePicker>
                 </div>
             </div>
 
