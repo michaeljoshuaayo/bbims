@@ -6,51 +6,25 @@ const requestingFacilityValue = ref('');
 const addressValue = ref('');
 const pathologistValue = ref('');
 const facilityTransacNumValue = ref('');
-
-const inventoryInputs = {
-    uncrossmatchedWholeBlood: {
-        aPos: ref(''),
-        aNeg: ref(''),
-        bPos: ref(''),
-        bNeg: ref(''),
-        oPos: ref(''),
-        oNeg: ref(''),
-        abPos: ref(''),
-        abNeg: ref('')
-    },
-    uncrossmatchedPackedRBC: {
-        aPos: ref(''),
-        aNeg: ref(''),
-        bPos: ref(''),
-        bNeg: ref(''),
-        oPos: ref(''),
-        oNeg: ref(''),
-        abPos: ref(''),
-        abNeg: ref('')
-    },
-    crossmatchedWholeBlood: {
-        aPos: ref(''),
-        aNeg: ref(''),
-        bPos: ref(''),
-        bNeg: ref(''),
-        oPos: ref(''),
-        oNeg: ref(''),
-        abPos: ref(''),
-        abNeg: ref('')
-    },
-    crossmatchedPackedRBC: {
-        aPos: ref(''),
-        aNeg: ref(''),
-        bPos: ref(''),
-        bNeg: ref(''),
-        oPos: ref(''),
-        oNeg: ref(''),
-        abPos: ref(''),
-        abNeg: ref('')
+const requisitionItems = ref([
+    {
+        bloodComponent: '',
+        bloodType: '',
+        quantity: ''
     }
-};
-</script>
+]);
 
+function addRequisitionItem() {
+    requisitionItems.value.push({
+        bloodComponent: '',
+        bloodType: '',
+        quantity: ''
+    });
+}
+function removeRequisitionItem(index) {
+    requisitionItems.value.splice(index, 1);
+}
+</script>
 <template>
     <div class="font-bold text-center text-xl mb-6">Blood Request Inquisition Slip Form (RIS)</div>
     <div class="card">
@@ -96,19 +70,19 @@ const inventoryInputs = {
                     <div class="grid grid-cols-2 gap-4">
                         <div>
                             <FloatLabel>
-                                <InputText id="" type="number" v-model="inventoryInputs.uncrossmatchedWholeBlood.aPos"></InputText>
+                                <InputText id="" type="number"></InputText>
                                 <label for="">A+</label>
                             </FloatLabel>
                         </div>
                         <div>
                             <FloatLabel>
-                                <InputText id="" type="number" v-model="inventoryInputs.uncrossmatchedWholeBlood.aNeg"></InputText>
+                                <InputText id="" type="number"></InputText>
                                 <label for="">A-</label>
                             </FloatLabel>
                         </div>
                         <div class="mt-3">
                             <FloatLabel>
-                                <InputText id="" type="number" v-model="inventoryInputs.uncrossmatchedWholeBlood.bPos"></InputText>
+                                <InputText id="" type="number"></InputText>
                                 <label for="">B+</label>
                             </FloatLabel>
                         </div>
@@ -305,6 +279,49 @@ const inventoryInputs = {
                     </div>
                 </div>
             </Fluid>
+        </div>
+    </div>
+    <span class="font-bold mb-6 block">Requisition</span>
+    <div class="grid grid-cols-2 gap-4">
+        <div class="card p-4">
+            <div v-for="(item, index) in requisitionItems" :key="index">
+                <div class="mb-6">
+                    <span class="">Request #{{ index + 1 }}</span>
+                </div>
+                <div class="grid grid-cols-3 gap-4">
+                    <div class="col-span-1">
+                        <FloatLabel>
+                            <InputText type="text" v-model="item.bloodComponent" class="w-full" />
+                            <label for="">Blood Component</label>
+                        </FloatLabel>
+                    </div>
+                    <div class="col-span-1">
+                        <FloatLabel>
+                            <InputText type="text" v-model="item.bloodType" class="w-full" />
+                            <label for="">Blood Type</label>
+                        </FloatLabel>
+                    </div>
+                    <div class="col-span-1">
+                        <FloatLabel>
+                            <InputText type="number" v-model="item.quantity" class="w-full" />
+                            <label for="">Quantity</label>
+                        </FloatLabel>
+                    </div>
+                    <div class="col-span-2">
+                        <FloatLabel>
+                            <InputText type="text" v-model="item.remarks" class="w-full" />
+                            <label for="">Remarks</label>
+                        </FloatLabel>
+                    </div>
+                    <div class="flex justify-end">
+                        <Button @click="removeRequisitionItem(index)" class="p-button-danger w-full">Remove<i class="pi pi-trash text-white-500"></i></Button>
+                    </div>
+                </div>
+                <hr class="mt-4 mb-5" />
+            </div>
+            <div class="flex justify-center mb-4">
+                <Button @click="addRequisitionItem" class="w-full">Add <i class="pi pi-plus text-white-500"></i></Button>
+            </div>
         </div>
     </div>
 </template>

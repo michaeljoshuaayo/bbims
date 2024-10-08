@@ -14,9 +14,9 @@ const router = createRouter({
                     component: () => import('@/views/Dashboard.vue')
                 },
                 {
-                    path: '/uikit/formlayout',
-                    name: 'formlayout',
-                    component: () => import('@/views/uikit/FormLayout.vue')
+                    path: '/uikit/RISForm',
+                    name: 'RISForm',
+                    component: () => import('@/views/uikit/RISForm.vue')
                 },
                 {
                     path: '/uikit/input',
@@ -88,11 +88,6 @@ const router = createRouter({
                     path: '/uikit/timeline',
                     name: 'timeline',
                     component: () => import('@/views/uikit/TimelineDoc.vue')
-                },
-                {
-                    path: '/pages/empty',
-                    name: 'empty',
-                    component: () => import('@/views/pages/Empty.vue')
                 },
                 {
                     path: '/pages/crud',

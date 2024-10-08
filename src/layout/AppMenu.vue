@@ -11,7 +11,7 @@ const model = ref([
     {
         label: 'UI Components',
         items: [
-            { label: 'RIS Form', icon: 'pi pi-fw pi-id-card', to: '/uikit/formlayout' },
+            { label: 'RIS Form', icon: 'pi pi-fw pi-id-card', to: '/uikit/RISForm' },
             { label: 'Input', icon: 'pi pi-fw pi-check-square', to: '/uikit/input' },
             { label: 'Button', icon: 'pi pi-fw pi-mobile', to: '/uikit/button', class: 'rotated-icon' },
             { label: 'Table', icon: 'pi pi-fw pi-table', to: '/uikit/table' },
@@ -68,11 +68,6 @@ const model = ref([
                 label: 'Not Found',
                 icon: 'pi pi-fw pi-exclamation-circle',
                 to: '/pages/notfound'
-            },
-            {
-                label: 'Empty',
-                icon: 'pi pi-fw pi-circle-off',
-                to: '/pages/empty'
             }
         ]
     },
