@@ -11,10 +11,10 @@ const model = ref([
     {
         label: 'Menu',
         items: [
-            { label: 'RIS Form', icon: 'pi pi-fw pi-id-card', to: '/uikit/RISForm' },
-            { label: 'Blood Request Status', icon: 'pi pi-fw pi-calendar', to: '/uikit/timeline' },
-            { label: 'Blood Requests', icon: 'pi pi-fw pi-table', to: '/uikit/table' },
-            { label: 'Analytics', icon: 'pi pi-fw pi-chart-bar', to: '/uikit/charts' }
+            { label: 'RIS Form', icon: 'pi pi-fw pi-id-card', to: '/menu/RISForm' },
+            { label: 'Blood Request Status', icon: 'pi pi-fw pi-calendar', to: '/menu/timeline' },
+            { label: 'Blood Requests', icon: 'pi pi-fw pi-table', to: '/menu/bloodrequests' },
+            { label: 'Analytics', icon: 'pi pi-fw pi-chart-bar', to: '/menu/charts' }
         ]
     },
     {

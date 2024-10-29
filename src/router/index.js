@@ -14,80 +14,80 @@ const router = createRouter({
                     component: () => import('@/views/Dashboard.vue')
                 },
                 {
-                    path: '/uikit/RISForm',
+                    path: '/menu/RISForm',
                     name: 'RISForm',
-                    component: () => import('@/views/uikit/RISForm.vue')
+                    component: () => import('@/views/menu/RISForm.vue')
                 },
                 {
-                    path: '/uikit/input',
+                    path: '/menu/input',
                     name: 'input',
-                    component: () => import('@/views/uikit/InputDoc.vue')
+                    component: () => import('@/views/menu/InputDoc.vue')
                 },
                 {
-                    path: '/uikit/button',
+                    path: '/menu/button',
                     name: 'button',
-                    component: () => import('@/views/uikit/ButtonDoc.vue')
+                    component: () => import('@/views/menu/ButtonDoc.vue')
                 },
                 {
-                    path: '/uikit/table',
+                    path: '/menu/bloodrequests',
                     name: 'table',
-                    component: () => import('@/views/uikit/TableDoc.vue')
+                    component: () => import('@/views/menu/TableDoc.vue')
                 },
                 {
-                    path: '/uikit/list',
+                    path: '/menu/list',
                     name: 'list',
-                    component: () => import('@/views/uikit/ListDoc.vue')
+                    component: () => import('@/views/menu/ListDoc.vue')
                 },
                 {
-                    path: '/uikit/tree',
+                    path: '/menu/tree',
                     name: 'tree',
-                    component: () => import('@/views/uikit/TreeDoc.vue')
+                    component: () => import('@/views/menu/TreeDoc.vue')
                 },
                 {
-                    path: '/uikit/panel',
+                    path: '/menu/panel',
                     name: 'panel',
-                    component: () => import('@/views/uikit/PanelsDoc.vue')
+                    component: () => import('@/views/menu/PanelsDoc.vue')
                 },
 
                 {
-                    path: '/uikit/overlay',
+                    path: '/menu/overlay',
                     name: 'overlay',
-                    component: () => import('@/views/uikit/OverlayDoc.vue')
+                    component: () => import('@/views/menu/OverlayDoc.vue')
                 },
                 {
-                    path: '/uikit/media',
+                    path: '/menu/media',
                     name: 'media',
-                    component: () => import('@/views/uikit/MediaDoc.vue')
+                    component: () => import('@/views/menu/MediaDoc.vue')
                 },
                 {
-                    path: '/uikit/message',
+                    path: '/menu/message',
                     name: 'message',
-                    component: () => import('@/views/uikit/MessagesDoc.vue')
+                    component: () => import('@/views/menu/MessagesDoc.vue')
                 },
                 {
-                    path: '/uikit/file',
+                    path: '/menu/file',
                     name: 'file',
-                    component: () => import('@/views/uikit/FileDoc.vue')
+                    component: () => import('@/views/menu/FileDoc.vue')
                 },
                 {
-                    path: '/uikit/menu',
+                    path: '/menu/menu',
                     name: 'menu',
-                    component: () => import('@/views/uikit/MenuDoc.vue')
+                    component: () => import('@/views/menu/MenuDoc.vue')
                 },
                 {
-                    path: '/uikit/charts',
+                    path: '/menu/charts',
                     name: 'charts',
-                    component: () => import('@/views/uikit/ChartDoc.vue')
+                    component: () => import('@/views/menu/ChartDoc.vue')
                 },
                 {
-                    path: '/uikit/misc',
+                    path: '/menu/misc',
                     name: 'misc',
-                    component: () => import('@/views/uikit/MiscDoc.vue')
+                    component: () => import('@/views/menu/MiscDoc.vue')
                 },
                 {
-                    path: '/uikit/timeline',
+                    path: '/menu/timeline',
                     name: 'timeline',
-                    component: () => import('@/views/uikit/TimelineDoc.vue')
+                    component: () => import('@/views/menu/TimelineDoc.vue')
                 },
                 {
                     path: '/pages/crud',
